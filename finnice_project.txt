@@ -11,6 +11,37 @@ License: Single Application License
 License ID: 9d919a92-2252-4723-9e07-cb9f61091411
 ******************************************************************
 
+**************************************************************************************************************************************
+IDE PHPStorm
+
+Install plugin and active it per Project under "Settings > Languages & Frameworks > PHP > Laravel"
+
+Use "Laravel IDE Helper Generator" to generate ide classes https://github.com/barryvdh/laravel-ide-helper#automatic-phpdocs-for-models
+
+Install Laravel IDE Helper Generator
+====================================
+    composer require --dev barryvdh/laravel-ide-helper
+
+    add the service provider to the providers array in config/app.php
+    -----------------------------------------------------------------
+    Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+    publish the config file to change implementations
+    -------------------------------------------------
+    php artisan vendor:publish --provider="Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider" --tag=config
+
+    change the include_fluent line your config/ide-helper.php file into:
+    --------------------------------------------------------------------
+    'include_fluent' => true,
+
+    phpDoc generation for Laravel Facades
+    -------------------------------------
+    php artisan clear-compiled
+    artisan optimize
+    php artisan ide-helper:generate
+
+    Add generated _ide_helper.php file to .gitignor
+**************************************************************************************************************************************
 Laravel 5.4 framework
 
 1. Set up Authentication

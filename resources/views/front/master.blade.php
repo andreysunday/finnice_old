@@ -43,10 +43,6 @@
         <!-- wrapper -->
         <div id="wrapper">
 
-            <!-- Top Bar -->
-            {{--@include('front.topbar')--}}
-            <!-- /Top Bar -->
-
             <!-- Top Nav -->
             @include('front.header')
             <!-- /Top Nav -->

@@ -11,8 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front.home');
-});
+//Route::get('/', function () {
+//    return view('front.home');
+//});
+
+Route::get('/', ['as' => 'home', 'uses' => 'Site\HomeController@show']);
+
 //Switcher of languages
 Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);

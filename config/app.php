@@ -182,6 +182,7 @@ return [
         'Lavary\Menu\ServiceProvider',
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
