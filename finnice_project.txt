@@ -1,0 +1,371 @@
+*****************************************************************
+Templates are Smarty http://wrapbootstrap.com/preview/WB02DSN1B
+
+Order#: WB0557D05
+Total: $18.00 USD
+Timestamp: 2017-09-01 21:29:51
+
+Item: Smarty - Website + Admin + RTL
+Item#: WB02DSN1B
+License: Single Application License
+License ID: 9d919a92-2252-4723-9e07-cb9f61091411
+******************************************************************
+
+Laravel 5.4 framework
+
+1. Set up Authentication
+
+2. Set up multilingual site
+
+    Article
+    https://mydnic.be/post/how-to-build-an-efficient-and-seo-friendly-multilingual-architecture-for-your-laravel-application
+
+    Working example https://github.com/mydnic/Laravel-Multilingual-SEO-Example
+
+    The features I wanted as must:
+
+    Having the Language Code in the URL
+    Force the language code to appear at the beginning of the URL
+    Write less code to do so
+    Having localized models, meaning : you can write the same blog post in several languages.
+    Having the ability to add as many language as you want through config file
+    Translate the blog post's slugs
+    Having localized URL's for both static pages and Eloquent Models (thanks to slugs)
+    Updating the slug of a page on the fly when switching language
+
+    Packages list:
+    ==============
+
+    Eloquent-Sluggable     https://github.com/cviebrock/eloquent-sluggable
+
+    Laravel-Translatable   https://github.com/dimsav/laravel-translatable
+
+    2.1 Installing the packages
+
+        Eloquent-Sluggable       composer require cviebrock/eloquent-sluggable:^4.1
+        Laravel-Translatable     composer require dimsav/laravel-translatable:^7.0
+
+        Config.app
+        ----------
+        'providers'      Cviebrock\EloquentSluggable\ServiceProvider::class,
+        'providers'      Dimsav\Translatable\TranslatableServiceProvider::class,
+
+        php artisan vendor:publish
+
+    2.2 Setting up our Models and Migrations (Post example)
+
+        php artisan make:model Post -m
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // app/Post.php
+
+        namespace App;
+
+        use Illuminate\Database\Eloquent\Model;
+        use Dimsav\Translatable\Translatable;
+
+        class Post extends Model
+        {
+            use Translatable;
+
+            public $translatedAttributes = ['title', 'slug', 'content'];
+
+            protected $fillable = ['title', 'slug', 'content'];
+
+        }
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        php artisan make:model PostTranslation -m
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // app/PostTranslation.php
+
+        namespace App;
+
+        use Cviebrock\EloquentSluggable\Sluggable;
+        use Illuminate\Database\Eloquent\Model;
+
+        class PostTranslation extends Model
+        {
+            use Sluggable;
+
+            public $timestamps = false;
+            protected $fillable = ['title', 'slug', 'content'];
+
+            /**
+             * Return the sluggable configuration array for this model.
+             *
+             * @return array
+             */
+            public function sluggable()
+            {
+                return [
+                    'slug' => [
+                        'source' => 'title'
+                    ]
+                ];
+            }
+        }
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        Create migration
+
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        /**
+         * Run the migrations.
+         *
+         * @return void
+         */
+        public function up()
+        {
+            Schema::create('post_translations', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('post_id')->unsigned();
+                $table->string('locale')->index();
+
+                // The actual fields to store the content of your entity. You can add whatever you need.
+                $table->string('title');
+                $table->string('slug')->unique();
+                $table->text('content');
+
+                $table->unique(['post_id', 'locale']);
+                $table->timestamps();
+            });
+        }
+        /**
+         * Reverse the migrations.
+         *
+         * @return void
+         */
+        public function down()
+        {
+            Schema::dropIfExists('post_translations');
+        }
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        php artisan migrate
+
+        2.3 Defining the available languages of your app
+
+            config/translatable.php
+
+            'locales' => [
+                'en' => 'English',
+                'fr' => 'Français',
+            ],
+
+        2.4 Managing Laravel's app locale
+
+            2.4.1 Middleware
+
+                Create a new file : app/Http/Middleware/Language.php
+
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                // app/Http/Middleware/Language.php
+                namespace App\Http\Middleware;
+
+                use Closure;
+                use Illuminate\Foundation\Application;
+                use Illuminate\Http\Request;
+                use Illuminate\Routing\Redirector;
+
+                class Language
+                {
+                    public function handle(Request $request, Closure $next)
+                    {
+                        // Check if the first segment matches a language code
+                        if (!array_key_exists($request->segment(1), config('translatable.locales')) ) {
+
+                            // Store segments in array
+                            $segments = $request->segments();
+
+                            // Set the default language code as the first segment
+                            $segments = array_prepend($segments, config('app.fallback_locale'));
+
+                            // Redirect to the correct url
+                            return redirect()->to(implode('/', $segments));
+                        }
+
+                        return $next($request);
+                    }
+                }
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+                Do not forget to add the middleware to the Kernel.php file:
+
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                // app/Http/Kernel.php
+
+                protected $middlewareGroups = [
+                    'web' => [
+                        \App\Http\Middleware\EncryptCookies::class,
+                        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                        \Illuminate\Session\Middleware\StartSession::class,
+                        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                        \App\Http\Middleware\Language::class, // Here it is
+                        \App\Http\Middleware\VerifyCsrfToken::class,
+                        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                    ],
+
+                    'api' => [
+                        'throttle:60,1',
+                        'bindings',
+                    ],
+                ];
+                ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+            2.4.2 Let Laravel know that you want to set the locale according to the URL
+
+                Edit AppServiceProvider.php and add this in the boot method:
+
+                +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                // app/Providers/AppServiceProvider.php
+
+                namespace App\Providers;
+
+                use Illuminate\Support\ServiceProvider;
+                use Illuminate\Http\Request;
+
+                class AppServiceProvider extends ServiceProvider
+                {
+                    /**
+                     * Bootstrap any application services.
+                     *
+                     * @return void
+                     */
+                    public function boot(Request $request)
+                    {
+                        // Set the app locale according to the URL
+                        app()->setLocale($request->segment(1));
+                    }
+
+                    /**
+                     * Register any application services.
+                     *
+                     * @return void
+                     */
+                    public function register()
+                    {
+                        //
+                    }
+                }
+                +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        2.5. Working with Routes
+
+            Head to app/Providers/RouteServiceProvider.php !
+
+            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //app/Providers/RouteServiceProvider.php
+
+            // ...
+            use Request;
+
+            class RouteServiceProvider extends ServiceProvider
+            {
+
+                // ...
+
+                protected function mapWebRoutes()
+                {
+                    $locale = Request::segment(1);
+
+                    Route::group([
+                        'middleware' => 'web',
+                        'namespace' => $this->namespace,
+                        'prefix' => $locale
+                    ], function ($router) {
+                        require base_path('routes/web.php');
+                    });
+                }
+
+                // ...
+
+            }
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        2.6  Language Switcher
+
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            // routes/web.php
+            Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
+            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+            create a new controller : php artisan make:controller LanguageController
+
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            // app/Http/Controllers/LanguageController.php
+            namespace App\Http\Controllers;
+
+            use Illuminate\Http\Request;
+            use Illuminate\Support\Facades\Lang;
+
+            class LanguageController extends Controller
+            {
+                public function switchLang(Request $request, $lang)
+                {
+                    // Store the URL on which the user was
+                    $previous_url = url()->previous();
+
+                    // Transform it into a correct request instance
+                    $previous_request = app('request')->create($previous_url);
+
+                    // Get Query Parameters if applicable
+                    $query = $previous_request->query();
+
+                    // In case the route name was translated
+                    $route_name = app('router')->getRoutes()->match($previous_request)->getName();
+
+                    // Store the segments of the last request as an array
+                    $segments = $previous_request->segments();
+
+                    // Check if the first segment matches a language code
+                    if (array_key_exists($lang, config('translatable.locales'))) {
+
+                        // If it was indeed a translated route name
+                        if ($route_name && Lang::has('routes.' . $route_name, $lang)) {
+
+                            // Translate the route name to get the correct URI in the required language, and redirect to that URL.
+                            if (count($query)) {
+                                return redirect()->to($lang . '/' .  trans('routes.' . $route_name, [], $lang) . '?' . http_build_query($query));
+                            }
+
+                            return redirect()->to($lang . '/' .  trans('routes.' . $route_name, [], $lang));
+                        }
+
+                        // Replace the first segment by the new language code
+                        $segments[0] = $lang;
+
+                        // Redirect to the required URL
+                        if (count($query)) {
+                            return redirect()->to(implode('/', $segments) . '?' . http_build_query($query));
+                        }
+
+                        return redirect()->to(implode('/', $segments));
+                    }
+
+                    return redirect()->back();
+                }
+
+            }
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+3. Set up multilevel menu
+
+    Packages list:
+    ==============
+
+    Laravel Menu https://github.com/lavary/laravel-menu
+
+    3.1 Installing the package
+
+        Laravel Menu       composer require lavary/laravel-menu
+
+        Config.app
+        ----------
+        'providers'      'Lavary\Menu\ServiceProvider',
+        'Aliases'        'Menu'       => 'Lavary\Menu\Facade',
+
+        php artisan vendor:publish

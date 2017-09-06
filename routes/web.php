@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('front.home');
 });
+//Switcher of languages
+Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);

@@ -40,12 +40,16 @@
         @include('front.slide-top')
         <!-- /SLIDE TOP -->
 
-        <!-- Top Nav -->
-        @include('front.header')
-        <!-- /Top Nav -->
-
         <!-- wrapper -->
         <div id="wrapper">
+
+            <!-- Top Bar -->
+            {{--@include('front.topbar')--}}
+            <!-- /Top Bar -->
+
+            <!-- Top Nav -->
+            @include('front.header')
+            <!-- /Top Nav -->
 
             <!-- LAYER SLIDER -->
             @include('front.layer-slider')

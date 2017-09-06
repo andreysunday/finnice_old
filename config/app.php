@@ -171,11 +171,17 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Fin\Providers\AppServiceProvider::class,
+        Fin\Providers\AuthServiceProvider::class,
+        // Fin\Providers\BroadcastServiceProvider::class,
+        Fin\Providers\EventServiceProvider::class,
+        Fin\Providers\RouteServiceProvider::class,
+        /*
+         * Custom packages...
+         */
+        'Lavary\Menu\ServiceProvider',
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
 
     ],
 
@@ -225,6 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Menu'       => 'Lavary\Menu\Facade',
 
     ],
 

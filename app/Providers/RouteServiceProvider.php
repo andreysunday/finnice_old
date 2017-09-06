@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace Fin\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Request;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'Fin\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -51,9 +52,18 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        {
+            $locale = Request::segment(1);
+
+            Route::group([
+                'middleware' => 'web',
+                'namespace' => $this->namespace,
+                'prefix' => $locale
+            ], function ($router) {
+                require base_path('routes/web.php');
+            });
+        }
+
     }
 
     /**
