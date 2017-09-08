@@ -37,7 +37,7 @@
     <body class="smoothscroll enable-animation">
 
         <!-- SLIDE TOP -->
-        @include('front.slide-top')
+        {{--@include('front.slide-top')--}}
         <!-- /SLIDE TOP -->
 
         <!-- wrapper -->

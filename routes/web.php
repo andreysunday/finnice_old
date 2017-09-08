@@ -11,10 +11,6 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('front.home');
-//});
-
 Route::get('/', ['as' => 'home', 'uses' => 'Site\HomeController@show']);
 
 //Switcher of languages
