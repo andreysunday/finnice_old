@@ -36,20 +36,12 @@
 
     <body class="smoothscroll enable-animation">
 
-        <!-- SLIDE TOP -->
-        {{--@include('front.slide-top')--}}
-        <!-- /SLIDE TOP -->
-
         <!-- wrapper -->
         <div id="wrapper">
 
-            <!-- Top Nav -->
-            @include('front.header')
-            <!-- /Top Nav -->
+            @yield('header')
 
-            <!-- LAYER SLIDER -->
-            @include('front.layer-slider')
-            <!-- /LAYER SLIDER -->
+            @yield('slider')
 
             <!-- FOOTER -->
             @include('front.footer')

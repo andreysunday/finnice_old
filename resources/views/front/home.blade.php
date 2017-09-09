@@ -4,6 +4,18 @@
     <title>Finnice</title>
 @endsection
 
+@section('header')
+    <!-- Top Nav -->
+    {!! $header !!}
+    <!-- /Top Nav -->
+@endsection
+
+@section('slider')
+    <!-- LAYER SLIDER -->
+    @include('front.layer-slider')
+    <!-- /LAYER SLIDER -->
+@endsection
+
 @section('preloader')
     <!-- PRELOADER -->
     <div id="preloader">
