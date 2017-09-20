@@ -12,7 +12,7 @@
 
 @section('slider')
     <!-- LAYER SLIDER -->
-    @include('front.layer-slider')
+    {!! $slider !!}
     <!-- /LAYER SLIDER -->
 @endsection
 

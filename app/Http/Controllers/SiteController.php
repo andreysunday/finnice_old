@@ -32,7 +32,7 @@ class SiteController extends Controller
 
     protected function getNavigation()
     {
-        $menuItems = $this->rep_navi->getCollection();
+        $menuItems = $this->rep_navi->getCollection('Navigation');
 
         return $menuItems;
     }

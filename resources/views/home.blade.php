@@ -48,7 +48,7 @@
 		menu-vertical-hide		= hidden, open on click
 		
 		BACKGROUND IMAGE [together with .boxed class]
-		data-background="assets/images/_smarty/boxed_background/1.jpg"
+		data-background="assets/imgs/_smarty/boxed_background/1.jpg"
 	-->
 	<body class="smoothscroll enable-animation">
 

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'Site\HomeController@show']);
+Route::get('/', ['as' => 'home', 'uses' => 'Site\HomeController@index']);
 
 //Switcher of languages
 Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);

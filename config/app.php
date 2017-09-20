@@ -182,6 +182,7 @@ return [
         'Lavary\Menu\ServiceProvider',
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
@@ -233,7 +234,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Menu'       => 'Lavary\Menu\Facade',
+        'Menu'  => 'Lavary\Menu\Facade',
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
