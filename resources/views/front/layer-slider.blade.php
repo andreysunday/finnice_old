@@ -12,7 +12,7 @@
                         <div class="ls-slide" data-ls="slidedelay:6000; transition2d: all;">
 
                             <img src="imgs/arms/{{ $slide->region->image_name.'.'.$slide->region->image_extension }}"
-                                 data-src="demo_files/images/1200x800/56-min.jpg"
+                                 data-src="imgs/slides/{{ $slide->image_name.'.'.$slide->image_extension }}"
                                  class="ls-bg" alt="Slide background"/>
 
                             <img class="ls-l" style="width: 420px;left: 70px;"
@@ -35,6 +35,7 @@
 								scaleyout:0.8;"
                                  style="
                                 top:250px;
+                                height: 200px;
                                 left:22%;"
                                  src="imgs/arms/{{ $slide->region->image_name.'.'.$slide->region->image_extension }}"
                                  alt="">

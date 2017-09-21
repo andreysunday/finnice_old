@@ -13,7 +13,7 @@ class RegionsTableSeeder extends Seeder
         //$this->regions = Config::get('defaults-finnice.regions.region-name');
         $this->regions = Config::get('defaults-finnice.regions');
         $this->image_names = Config::get('defaults-finnice.slide-images.image-name');
-        $this->region_keys = array_keys($this->regions);
+        //$this->region_keys = array_keys($this->regions);
     }
 
     /**
