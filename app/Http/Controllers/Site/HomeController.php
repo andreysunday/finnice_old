@@ -33,6 +33,7 @@ class HomeController extends SiteController
         }
 
         $slide = Slide::find(7);
+
         //dd($slide->region->name);
 
 

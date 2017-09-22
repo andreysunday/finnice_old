@@ -9,7 +9,7 @@ class Slide extends Model
 {
     use Translatable;
 
-    public $translatedAttributes = ['alt'];
+    public $translatedAttributes = ['title','alt','text'];
 
     protected $table = 'slides';
     protected $fillable = ['region_id','mod','alias','image_name','image_extension'];

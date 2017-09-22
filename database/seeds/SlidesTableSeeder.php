@@ -5,12 +5,15 @@ use Illuminate\Database\Seeder;
 class SlidesTableSeeder extends Seeder
 {
     private $regions = array();
-//    private $slide_names = array();
-//    private $region_alias = array();
+    private $slides = array();
 
     public function __construct()
     {
+        if(is_null(\Fin\Models\Region::first())) {
+            $this->call(RegionsTableSeeder::class);
+        }
         $this->regions = Config::get('defaults-finnice.regions');
+        $this->slides = Config::get('defaults-finnice.slides');
     }
 
     /**
@@ -23,14 +26,11 @@ class SlidesTableSeeder extends Seeder
         DB::table('slides')->delete();
         DB::table('slide_translations')->delete();
 
-        if(is_null(\Fin\Models\Region::all()->first())) {
-            $this->call(RegionsTableSeeder::class);
-        }
-
         foreach($this->regions as $key => $item) {
+            //dd($this->slides[$key]);
             if($item['reg']) {
                 $region_id = \Fin\Models\Region::all()->where('alias',$key)->first();
-                //dd($region_id);
+                //dd($key);
                 DB::table('slides')->insert([
                     'mod' => 'seed',
                     'region_id' => $region_id->id,
@@ -42,21 +42,27 @@ class SlidesTableSeeder extends Seeder
                 ]);
 
                 $latest_record = DB::table('slides')->where('id', DB::getPdo()->lastInsertId())->first();
-                //dd($item['reg']['en']);
+                //dd($this->slides['la']);
                 DB::table('slide_translations')->insert([
                     'slide_id' => $latest_record->id,
                     'locale' => 'en',
+                    'title' => $this->slides[$key]['title']['en'],
                     'alt' => $item['reg']['en'],
+                    'text' => $this->slides[$key]['text']['en'],
                 ]);
                 DB::table('slide_translations')->insert([
                     'slide_id' => $latest_record->id,
                     'locale' => 'fi',
+                    'title' => $this->slides[$key]['title']['fi'],
                     'alt' => $item['reg']['fi'],
+                    'text' => $this->slides[$key]['text']['fi'],
                 ]);
                 DB::table('slide_translations')->insert([
                     'slide_id' => $latest_record->id,
                     'locale' => 'ru',
+                    'title' => $this->slides[$key]['title']['ru'],
                     'alt' => $item['reg']['ru'],
+                    'text' => $this->slides[$key]['text']['ru'],
                 ]);
             }
         }

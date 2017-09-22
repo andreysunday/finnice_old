@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class SlideTranslation extends Model
 {
     protected $table = 'slide_translations';
-    protected $fillable = ['alt'];
+    protected $fillable = ['title','alt','text'];
 }

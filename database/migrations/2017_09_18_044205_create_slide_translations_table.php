@@ -18,7 +18,9 @@ class CreateSlideTranslationsTable extends Migration
             $table->integer('slide_id')->unsigned();
             $table->string('locale')->index();
 
+            $table->string('title');
             $table->string('alt');
+            $table->text('text');
 
             $table->unique(['slide_id','locale']);
             $table->timestamps();

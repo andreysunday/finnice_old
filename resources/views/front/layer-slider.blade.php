@@ -16,29 +16,18 @@
                                  class="ls-bg" alt="Slide background"/>
 
                             <img class="ls-l" style="width: 420px;left: 70px;"
-                                 data-ls="
-                            offsetxin:0;
-                            offsetyin:top;
-                            delayin:350;
-                            fadein:false;
-                            offsetxout:right;
-                            durationout:1000;
-                            fadeout:false;"
+                                 data-ls="{{ config('defaults-finnice.slides.image-bg-caption-data-ls') }}"
                                  src="assets/images/_smarty/1x1.png"
                                  data-src="assets/images/_smarty/caption_bg.png" alt="">
                             {{--Arms image of region--}}
-                            <img class="ls-l" data-ls="
-								durationin:1500;
-								scalexin:0.8;
-								scaleyin:0.8;
-								scalexout:0.8;
-								scaleyout:0.8;"
+                            <img class="ls-l" data-ls="{{ config('defaults-finnice.slides.image-arms-data-ls') }}"
                                  style="
                                 top:250px;
                                 height: 200px;
                                 left:22%;"
                                  src="imgs/arms/{{ $slide->region->image_name.'.'.$slide->region->image_extension }}"
                                  alt="">
+
                             <p class="ls-l"
                                style="top:48px;
                           left:70px;
@@ -54,21 +43,11 @@
                           white-space: nowrap;
                           width: 420px;"
 
-                               data-ls="offsetxin:0;
-                            durationin:1500;
-                            delayin:500;
-                            rotatein:30;
-                            scalexin:0.2;
-                            scaleyin:0.2;
-                            offsetxout:0;
-                            offsetyout:top;
-                            durationout:1000;
-                            fadeout:false;
-                            rotateout:30;
-                            scalexout:0.2;
-                            scaleyout:0.2;">
-                                Website about Finland
+                               data-ls="{{ config('defaults-finnice.slides.p-first-text-data-ls') }}">
+
+                                {{ $slide->title }}
                             </p>
+
                             <p class="ls-l"
                                style="top:92px;
                           left:70px;
@@ -79,20 +58,11 @@
                           line-height: 35px;
                           color:#ffffff;
                           white-space: normal;"
-                               data-ls="offsetxin:0;
-                            durationin:1500;
-                            delayin:750;
-                            rotatein:30;
-                            scalexin:0.2;
-                            scaleyin:0.2;
-                            offsetxout:right;
-                            durationout:1000;
-                            fadeout:false;
-                            rotateout:45;
-                            scalexout:0.2;
-                            scaleyout:0.2;">
+                               data-ls="{{ config('defaults-finnice.slides.p-second-text-data-ls') }}">
+
                                 {{ $slide->region->name }}
                             </p>
+
                             <p class="ls-l"
                                style="top:172px;
                           left:70px;
@@ -105,9 +75,8 @@
                           text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
                           font-weight: 300;
                           white-space: normal;"
-                               data-ls="offsetxin:0;offsetyin:bottom;durationin:1500;delayin:1200;fadein:false;offsetxout:0;offsetyout:bottom;durationout:1000;fadeout:false;">
-                                Awesome sliders give you the opportunity to showcase important content.
-                                Smarty will constantly be updatedwith brand new features and additions
+                               data-ls="{{ config('defaults-finnice.slides.p-third-text-data-ls') }}">
+                                {{ $slide->text }}
                             </p>
                         </div>
                     @endif
