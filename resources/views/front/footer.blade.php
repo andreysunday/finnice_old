@@ -7,12 +7,29 @@
 			<div class="col-md-8">
 
 				<div class="clearfix">
+					<!-- Counter -->
+					<div>
+						<div class="text-center">
+
+							<h1 class="margin-bottom-20 size-16">FINNICE IS UNDER CONSTRUCTION</h1>
+							{{--<p class="size-20 font-lato text-muted">Please, check back again , we are working hard.</p>--}}
+
+							<div style="max-width:550px; margin:auto;">
+								<div class="countdown countdown-lg"
+									 data-labels="years,months,weeks,days,hour,min,sec" data-from="December 31, 2017 00:00:00">
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!-- Counter End -->
 
 					<!-- Footer Logo -->
-					<img class="footer-logo footer-2" src="assets/images/_smarty/logo-footer.png" alt="" />
+					{{--<img class="footer-logo footer-2" src="assets/images/_smarty/logo-footer.png" alt="" />--}}
 
 					<!-- Small Description -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque.</p>
+					{{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque.</p>--}}
 
 				</div>
 

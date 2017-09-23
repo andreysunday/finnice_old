@@ -49,7 +49,7 @@ class HomeController extends SiteController
 
     public function getSlides()
     {
-        $slides = $this->rep_sldr->getCollection('Slide');
+        $slides = $this->rep_sldr->getCollection('Slide')->random(10);
 
         return $slides;
     }

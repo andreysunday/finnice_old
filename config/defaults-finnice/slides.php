@@ -99,32 +99,32 @@ return [
     ],
     'ka' => [
         'title' => [
-            'en' => 'Unknown location',
-            'fi' => 'Tuntematon sijainti',
-            'ru' => 'Неизвестное место',
+            'en' => 'National Park Hiidenportti ',
+            'fi' => 'Kansallispuisto Hiidenportti',
+            'ru' => 'Национальный парк Хииденпортти',
         ],
         'text' => [
-            'en' => 'Awesome sliders give you the opportunity to see beautiful Finland\'s photos.
-                     Finnice will constantly be updated with brand new photos and additions.',
-            'fi' => 'Mahtavat liukusäätimet antavat sinulle mahdollisuuden nähdä kauniita suomalaisia valokuvia. 
-                     Tuoksu päivitetään jatkuvasti uusilla valokuvilla ja lisäyksillä.',
-            'ru' => 'Замечательный слайдер дает вам возможность увидеть красивые фотографии Финляндии.
-                     Finnice будет постоянно обновляться новыми фотографиями и дополнениями.',
+            'en' => 'The territory of the Heidenporti National Park is a corner of untouched relict nature. In the 
+                     center of the park is a picturesque canyon.',
+            'fi' => 'Heidenportin kansallispuiston alue on koskemattoman reliktin luonnetta. Puiston keskustassa on 
+                     viehättävä kanjoni.',
+            'ru' => 'Территория национального парка Хииденпортти – это уголок нетронутой реликтовой природы. В центре 
+                     парка расположен живописный каньон.',
         ],
     ],
     'nk' => [
         'title' => [
-            'en' => 'Unknown location',
-            'fi' => 'Tuntematon sijainti',
-            'ru' => 'Неизвестное место',
+            'en' => 'Botanical Garden Botania',
+            'fi' => 'Kasvitieteellinen puutarha Botania',
+            'ru' => 'Ботанический сад Botania',
         ],
         'text' => [
-            'en' => 'Awesome sliders give you the opportunity to see beautiful Finland\'s photos.
-                     Finnice will constantly be updated with brand new photos and additions.',
-            'fi' => 'Mahtavat liukusäätimet antavat sinulle mahdollisuuden nähdä kauniita suomalaisia valokuvia. 
-                     Tuoksu päivitetään jatkuvasti uusilla valokuvilla ja lisäyksillä.',
-            'ru' => 'Замечательный слайдер дает вам возможность увидеть красивые фотографии Финляндии.
-                     Finnice будет постоянно обновляться новыми фотографиями и дополнениями.',
+            'en' => 'Botanya is a botanical garden with tropical butterflies and a parrot that numbers more than 600 
+                     species of tropical plants.',
+            'fi' => 'Botanya on kasvitieteellinen puutarha, jossa on trooppisia perhosia ja papukaija, jossa on yli 
+                     600 lajia trooppisia kasveja.',
+            'ru' => 'Ботания – это ботанический сад с тропическими бабочками и попугаем, который насчитывает более
+                     600 видов тропических растений.',
         ],
     ],
     'ns' => [
