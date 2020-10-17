@@ -1633,7 +1633,7 @@ decompress-unzip@^3.0.0:
     vinyl "^1.0.0"
     yauzl "^2.2.1"
 
-decompress@^3.0.0:
+decompress@^4.2.1:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/decompress/-/decompress-3.0.0.tgz#af1dd50d06e3bfc432461d37de11b38c0d991bed"
   dependencies:
